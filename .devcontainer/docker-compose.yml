@@ -1,0 +1,41 @@
+services:
+  lab-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    user: "1000:100"
+    command: sleep infinity
+    network_mode: service:mongodb
+    environment:
+      - MONGODB_URI=mongodb://admin:mongodb@localhost:27017/?directConnection=true
+      - NODE_PATH=/workspaces/mongodb-voyage-lab/node_modules
+
+  mongodb:
+    image: mongodb/mongodb-atlas-local:8.2.0
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=admin
+      - MONGODB_INITDB_ROOT_PASSWORD=mongodb
+      # Required for native auto-embedding (notebook 02).
+      # mongot uses these keys to call VoyageAI on your behalf.
+      # Set VOYAGE_API_KEY in your Codespace secrets or .env before opening the Codespace.
+      - INDEXING_VOYAGE_AI_API_KEY=${VOYAGE_API_KEY}
+      - QUERY_VOYAGE_AI_API_KEY=${VOYAGE_API_KEY}
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  mongodb_data:

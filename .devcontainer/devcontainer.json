@@ -1,0 +1,24 @@
+{
+    "name": "MongoDB VoyageAI Lab",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "lab-runner",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "forwardPorts": [8888, 27017],
+    "hostRequirements": {
+        "cpus": 4
+    },
+    "containerEnv": {
+        "MONGODB_URI": "mongodb://admin:mongodb@localhost:27017/",
+        "NODE_PATH": "/workspaces/${localWorkspaceFolderBasename}/node_modules",
+        "VOYAGE_API_KEY": "${localEnv:VOYAGE_API_KEY}"
+    },
+    "postCreateCommand": "npm install && node .devcontainer/seed.js",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-toolsai.jupyter",
+                "mongodb.mongodb-vscode"
+            ]
+        }
+    }
+}

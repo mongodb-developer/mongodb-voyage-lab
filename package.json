@@ -1,0 +1,13 @@
+{
+  "name": "mongodb-voyage-lab",
+  "version": "1.0.0",
+  "description": "Lab demonstrating VoyageAI's advanced embedding and reranking capabilities with MongoDB Atlas Vector Search",
+  "dependencies": {
+    "mongodb": "^6.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
