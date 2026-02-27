@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "ae-001",
+    "name": "Beachfront studio in Malibu",
+    "description": "Wake up to ocean waves in this light-filled studio steps from the Pacific. Perfect for surfers and sunset chasers.",
+    "price": 320,
+    "bedrooms": 1,
+    "property_type": "Studio"
+  },
+  {
+    "_id": "ae-002",
+    "name": "Mountain cabin in Aspen",
+    "description": "Secluded log cabin with hot tub, fireplace and ski-in/ski-out access. Stunning alpine views.",
+    "price": 550,
+    "bedrooms": 3,
+    "property_type": "Cottage"
+  },
+  {
+    "_id": "ae-003",
+    "name": "Urban loft in Brooklyn",
+    "description": "Industrial-chic loft in a converted warehouse. High ceilings, exposed brick, and rooftop access.",
+    "price": 195,
+    "bedrooms": 1,
+    "property_type": "Loft"
+  },
+  {
+    "_id": "ae-004",
+    "name": "Vineyard cottage in Napa Valley",
+    "description": "Nestled among grapevines, this romantic cottage offers wine tastings, garden walks, and farm-to-table breakfasts.",
+    "price": 430,
+    "bedrooms": 2,
+    "property_type": "Cottage"
+  },
+  {
+    "_id": "ae-005",
+    "name": "Historic apartment in Rome, Trastevere",
+    "description": "Stay in a Renaissance palazzo. Frescoed ceilings, stone floors, and a terrace overlooking ancient cobblestones.",
+    "price": 280,
+    "bedrooms": 2,
+    "property_type": "Apartment"
+  }
+]
