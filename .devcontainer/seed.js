@@ -9,16 +9,32 @@ const uri = process.env.MONGODB_URI ?? 'mongodb://admin:mongodb@localhost:27017/
 // ---------------------------------------------------------------------------
 
 const cities = [
-  { city: 'New York', country: 'United States', country_code: 'US', market: 'New York', coords: [-73.9857, 40.7484] },
-  { city: 'London',   country: 'United Kingdom', country_code: 'GB', market: 'London',   coords: [-0.1278, 51.5074] },
-  { city: 'Paris',    country: 'France',          country_code: 'FR', market: 'Paris',    coords: [2.3522, 48.8566]  },
-  { city: 'Tokyo',    country: 'Japan',           country_code: 'JP', market: 'Tokyo',    coords: [139.6917, 35.6895]},
-  { city: 'Barcelona',country: 'Spain',           country_code: 'ES', market: 'Barcelona',coords: [2.1734, 41.3851]  },
-  { city: 'Amsterdam',country: 'Netherlands',     country_code: 'NL', market: 'Amsterdam',coords: [4.9041, 52.3676]  },
-  { city: 'Porto',    country: 'Portugal',        country_code: 'PT', market: 'Porto',    coords: [-8.6291, 41.1579] },
-  { city: 'Sydney',   country: 'Australia',       country_code: 'AU', market: 'Sydney',   coords: [151.2093,-33.8688]},
-  { city: 'Lisbon',   country: 'Portugal',        country_code: 'PT', market: 'Lisbon',   coords: [-9.1393, 38.7223] },
-  { city: 'Berlin',   country: 'Germany',         country_code: 'DE', market: 'Berlin',   coords: [13.4050, 52.5200] },
+  // Europe
+  { city: 'London',       country: 'United Kingdom', country_code: 'GB', market: 'London',       coords: [-0.1278,   51.5074] },
+  { city: 'Paris',        country: 'France',          country_code: 'FR', market: 'Paris',        coords: [2.3522,   48.8566]  },
+  { city: 'Barcelona',    country: 'Spain',           country_code: 'ES', market: 'Barcelona',    coords: [2.1734,   41.3851]  },
+  { city: 'Amsterdam',    country: 'Netherlands',     country_code: 'NL', market: 'Amsterdam',    coords: [4.9041,   52.3676]  },
+  { city: 'Lisbon',       country: 'Portugal',        country_code: 'PT', market: 'Lisbon',       coords: [-9.1393,  38.7223]  },
+  { city: 'Porto',        country: 'Portugal',        country_code: 'PT', market: 'Porto',        coords: [-8.6291,  41.1579]  },
+  { city: 'Berlin',       country: 'Germany',         country_code: 'DE', market: 'Berlin',       coords: [13.4050,  52.5200]  },
+  { city: 'Rome',         country: 'Italy',           country_code: 'IT', market: 'Rome',         coords: [12.4964,  41.9028]  },
+  // North America
+  { city: 'New York',     country: 'United States',   country_code: 'US', market: 'New York',     coords: [-73.9857, 40.7484]  },
+  { city: 'Toronto',      country: 'Canada',          country_code: 'CA', market: 'Toronto',      coords: [-79.3832, 43.6532]  },
+  { city: 'Vancouver',    country: 'Canada',          country_code: 'CA', market: 'Vancouver',    coords: [-123.1216,49.2827]  },
+  { city: 'Montreal',     country: 'Canada',          country_code: 'CA', market: 'Montreal',     coords: [-73.5674, 45.5017]  },
+  { city: 'Calgary',      country: 'Canada',          country_code: 'CA', market: 'Calgary',      coords: [-114.0719,51.0447]  },
+  // South America
+  { city: 'Buenos Aires', country: 'Argentina',       country_code: 'AR', market: 'Buenos Aires', coords: [-58.3816, -34.6037] },
+  { city: 'São Paulo',    country: 'Brazil',          country_code: 'BR', market: 'São Paulo',    coords: [-46.6333, -23.5505] },
+  { city: 'Rio de Janeiro',country:'Brazil',          country_code: 'BR', market: 'Rio de Janeiro',coords:[-43.1729, -22.9068] },
+  { city: 'Bogotá',       country: 'Colombia',        country_code: 'CO', market: 'Bogotá',       coords: [-74.0721,  4.7110]  },
+  { city: 'Medellín',     country: 'Colombia',        country_code: 'CO', market: 'Medellín',     coords: [-75.5812,  6.2442]  },
+  { city: 'Santiago',     country: 'Chile',           country_code: 'CL', market: 'Santiago',     coords: [-70.6483, -33.4569] },
+  { city: 'Lima',         country: 'Peru',            country_code: 'PE', market: 'Lima',         coords: [-77.0428, -12.0464] },
+  // Asia-Pacific
+  { city: 'Tokyo',        country: 'Japan',           country_code: 'JP', market: 'Tokyo',        coords: [139.6917, 35.6895]  },
+  { city: 'Sydney',       country: 'Australia',       country_code: 'AU', market: 'Sydney',       coords: [151.2093, -33.8688] },
 ];
 
 const propertyTypes = ['Apartment', 'House', 'Loft', 'Condo', 'Villa', 'Studio', 'Townhouse', 'Cottage'];
@@ -36,6 +52,16 @@ const summaries = [
   'Contemporary condo on a high floor with city skyline views. Gym and pool access included. Business-friendly with concierge service.',
   'Sun-filled townhouse spread across three floors. Pet-friendly, with a private rooftop terrace and dedicated parking.',
   'Welcoming apartment in a lively cultural district. Local galleries, markets, and independent coffee shops right at your doorstep.',
+  'Sleek waterfront condo with floor-to-ceiling glass and sweeping harbour views. Fall asleep to the sound of the water and wake up to stunning sunrises.',
+  'Bright and airy suite in a heritage building, blending period architecture with contemporary interiors. Exposed stone walls and hardwood floors throughout.',
+  'Private garden apartment tucked away on a leafy residential street. A genuine home-away-from-home, ideal for long stays and remote workers.',
+  'Rooftop penthouse with 360-degree city views and a private terrace. Entertain, sunbathe, or stargaze from your personal outdoor sanctuary.',
+  'Vibrant neighbourhood flat with colourful street art at every corner. Close to the best local food markets, craft beer bars, and live music venues.',
+  'Architect-designed open-plan home featuring bespoke furniture and curated original artwork. Sophisticated, calm, and entirely unique.',
+  'Tropical hideaway with lush jungle surroundings, a hammock on the veranda, and outdoor shower. The sounds of nature replace the city hum.',
+  'Classic brownstone apartment on a tree-lined avenue, lovingly restored with original parquet floors and tall sash windows. The ideal base for city explorers.',
+  'Bright mountain-view suite with ski-in access in winter and hiking trails at the door in summer. A four-season retreat with a wood-burning stove.',
+  'Bohemian artist studio with high raftered ceilings, skylights, and creative vibes. Located steps from galleries, antique shops, and the weekend flea market.',
 ];
 
 const descriptions = [
@@ -47,15 +73,34 @@ const descriptions = [
   'Ample storage space, a full-size washing machine and dryer, and an iron are available for longer stays.',
   'The bedroom is separated from the living area by solid doors, providing a genuine separation of rest and relaxation zones.',
   'Local artwork curated by the host adorns the walls. Every piece has a story — ask about them at check-in.',
+  'The building is serviced by a 24-hour concierge, and secure underground parking is available on request. Contactless self check-in via smart lock.',
+  'Floor-to-ceiling bookshelves line the main wall. A curated selection of travel literature and local history books is free for guests to enjoy.',
+  'The kitchen is stocked with local spices, fresh coffee, and a welcome basket of regional produce on arrival. A love letter to local food culture.',
+  'Heated bathroom floors, rainfall shower, and a deep soaking tub make this one of the most spa-like private rentals in the city.',
+  'The terrace faces west for golden-hour sunsets. A telescope, outdoor heaters, and a fire pit are set up year-round for evening gatherings.',
+  'Soundproofed walls and blackout blinds ensure complete rest. The building is set back from the road and surrounded by mature trees.',
+  'Bike rentals are available through the host at a discount. The neighbourhood is flat and criss-crossed with dedicated cycling lanes.',
+  'The host has prepared a detailed digital guidebook with neighbourhood restaurant picks, transport tips, and day-trip suggestions tailored to every interest.',
 ];
 
-const hostNames  = ['Alice', 'Marco', 'Sophie', 'David', 'Yuki', 'Elena', 'Carlos', 'Priya', 'Luca', 'Amara', 'James', 'Mei'];
+const hostNames  = [
+  'Alice', 'Marco', 'Sophie', 'David', 'Yuki', 'Elena', 'Carlos', 'Priya', 'Luca', 'Amara',
+  'James', 'Mei', 'Valentina', 'Sebastián', 'Isabelle', 'Kwame', 'Natasha', 'Diego', 'Aiko',
+  'Camille', 'Rafael', 'Nadia', 'Patrick', 'Lucía', 'Omar', 'Ingrid', 'Felipe', 'Zara', 'Hiroshi', 'Chloe',
+];
 const hostAbouts = [
   'I love welcoming guests from around the world and sharing local tips. Ask me anything about the neighbourhood!',
   'Superhost for 5 years. I live nearby and am always happy to help make your stay memorable.',
   'Travel enthusiast and interior designer. I put a lot of care into every detail of this space.',
   'Local food blogger and tour guide. I can recommend the best hidden gems in the city.',
   'Architect by profession. This property is my passion project — every corner is intentional.',
+  'Born and raised here, I know every shortcut, secret viewpoint, and hole-in-the-wall restaurant. Let me share them with you.',
+  'I work in hospitality and bring that professional attention to detail to every stay. Your comfort is my priority.',
+  'Passionate about sustainable travel. This property uses solar power, filtered tap water, and 100% recycled linens.',
+  'Artist and musician. The apartment reflects my love of colour, texture, and creativity. I hope it inspires you too.',
+  'I manage several properties but treat each guest as if they are staying in my own home. Reviews speak for themselves!',
+  'Retired teacher and lifelong host. I genuinely enjoy meeting people and love helping guests discover the real city.',
+  'Digital nomad for 10 years before settling here. I understand exactly what remote workers need — fast WiFi, a great desk, and strong coffee.',
 ];
 
 const amenityPool = [
