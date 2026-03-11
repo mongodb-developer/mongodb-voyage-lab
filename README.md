@@ -13,15 +13,17 @@ Hands-on TypeScript notebooks exploring VoyageAI's embedding and reranking capab
 | 05 | Contextualized Embeddings | `voyage-context-3` captures full-document context per chunk |
 | 06 | Hybrid Search | `$rankFusion` merges semantic and keyword pipelines |
 
+> **Lab 02** uses MongoDB's native auto-embedding feature, which requires the VoyageAI API key
+> to be available to the database engine at startup. This works out of the box when you configure
+> `VOYAGE_API_KEY` as a [Codespace secret](https://github.com/settings/codespaces) before creating
+> your Codespace, or when running locally with the variable in your environment.
+> For all other labs, paste your key directly in the first cell.
+
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [VS Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), **or** a [GitHub Codespace](https://github.com/features/codespaces)
-- A [VoyageAI API key](https://dash.voyageai.com) *(free tier is enough for all notebooks)*
-
-> **Notebook 02 only:** Auto-embedding requires your key at container startup.
-> Set `VOYAGE_API_KEY` as a [Codespace secret](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-features-to-a-devcontainer-file) (GitHub → Settings → Codespaces → Secrets) before opening the Codespace.
-> For notebooks 01 and 03–06, paste your key directly in the setup cell.
+- A [VoyageAI API key](https://dash.voyageai.com) *(free tier is sufficient for all notebooks)*
 
 ## Getting started
 
@@ -47,6 +49,12 @@ code mongodb-voyage-lab
 | Jupyter | TypeScript kernel via [tslab](https://github.com/yunabe/tslab) |
 | Seed data | 100 Airbnb-style listings seeded automatically on first start |
 
+The VS Code [MongoDB extension](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode) is pre-installed. Connect with:
+
+```
+mongodb://admin:mongodb@localhost:27017/?directConnection=true
+```
+
 ## Project structure
 
 ```
@@ -57,6 +65,9 @@ lab/
   04_reranking.ipynb
   05_contextualized_embeddings.ipynb
   06_hybrid_search.ipynb
+data/
+  auto_embed_listings.json       ← listings used in lab 02
+  multimodal_embeddings.json     ← pre-computed image embeddings for lab 03
 .devcontainer/
   devcontainer.json
   docker-compose.yml
