@@ -7,9 +7,6 @@
     "hostRequirements": {
         "cpus": 4
     },
-    "features": {
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-    },
     "containerEnv": {
         "MONGODB_URI": "mongodb://admin:mongodb@mongodb:27017/?directConnection=true",
         "NODE_PATH": "/workspaces/${localWorkspaceFolderBasename}/node_modules",

@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
-      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       mongodb:
         condition: service_healthy
@@ -21,14 +20,9 @@ services:
     restart: unless-stopped
     volumes:
       - mongodb_data:/data/db
-    env_file:
-      - path: .env
-        required: false
     environment:
       - MONGODB_INITDB_ROOT_USERNAME=admin
       - MONGODB_INITDB_ROOT_PASSWORD=mongodb
-      # Injected via .env written by setup.sh (postCreateCommand) where
-      # Codespace secrets are available. See .devcontainer/setup.sh.
       - INDEXING_VOYAGE_AI_API_KEY=${VOYAGE_API_KEY:-}
       - QUERY_VOYAGE_AI_API_KEY=${VOYAGE_API_KEY:-}
     ports:
