@@ -15,4 +15,5 @@ yarn-error.log*
 /assets
 /notebooks
 
+.env
 .devcontainer/.env
