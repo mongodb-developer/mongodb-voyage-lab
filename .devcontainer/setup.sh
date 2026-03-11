@@ -2,11 +2,11 @@
 set -e
 
 npm install
-node .devcontainer/seed.js
 
 if [ -z "$VOYAGE_API_KEY" ]; then
-  echo "VOYAGE_API_KEY not set — auto-embedding (notebook 02) will not work."
+  echo "VOYAGE_API_KEY not set — seeding without auto-embedding (notebook 02 will not work)."
   echo "Add it as a Codespace secret and rebuild."
+  node .devcontainer/seed.js
   exit 0
 fi
 
@@ -16,20 +16,22 @@ sudo chmod 666 /var/run/docker.sock
 # Find the running mongodb container
 MONGODB_CONTAINER=$(docker ps --filter "ancestor=mongodb/mongodb-atlas-local:8.2.0" --format "{{.Names}}" | head -1)
 if [ -z "$MONGODB_CONTAINER" ]; then
-  echo "Could not find mongodb container — skipping auto-embedding setup."
+  echo "Could not find mongodb container — seeding original and exiting."
+  node .devcontainer/seed.js
   exit 0
 fi
 
-# Capture its network and volume before we stop it
-NETWORK=$(docker inspect "$MONGODB_CONTAINER" --format '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}')
-VOLUME=$(docker inspect "$MONGODB_CONTAINER" --format '{{range .Mounts}}{{if eq .Type "volume"}}{{.Name}}{{end}}{{end}}')
+# Get exactly the volume mounted at /data/db (avoid concatenating multiple mount names)
+VOLUME=$(docker inspect "$MONGODB_CONTAINER" \
+  --format '{{range .Mounts}}{{if and (eq .Type "volume") (eq .Destination "/data/db")}}{{.Name}}{{end}}{{end}}')
+NETWORK=$(docker inspect "$MONGODB_CONTAINER" \
+  --format '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}')
 
 echo "Restarting mongodb (network=$NETWORK, volume=$VOLUME) with VOYAGE_API_KEY..."
 
 docker stop "$MONGODB_CONTAINER"
 docker rm   "$MONGODB_CONTAINER"
 
-# Start a fresh container on the same network/volume with the API key
 docker run -d \
   --name "$MONGODB_CONTAINER" \
   --network "$NETWORK" \
@@ -43,4 +45,10 @@ docker run -d \
   --restart unless-stopped \
   mongodb/mongodb-atlas-local:8.2.0
 
-echo "MongoDB restarting with VOYAGE_API_KEY — will be ready in ~30s."
+echo "Waiting for MongoDB to accept connections..."
+until docker exec "$MONGODB_CONTAINER" mongosh --quiet --eval "db.adminCommand('ping').ok" 2>/dev/null | grep -q 1; do
+  sleep 3
+done
+
+node .devcontainer/seed.js
+echo "Setup complete. MongoDB ready with VOYAGE_API_KEY."
