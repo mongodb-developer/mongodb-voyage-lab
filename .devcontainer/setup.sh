@@ -34,6 +34,9 @@ docker-compose \
   up -d --force-recreate --no-deps mongodb
 
 echo "Waiting for MongoDB to be ready..."
+# Re-query container name — docker-compose v1 may rename it on recreate
+sleep 3
+MONGODB_CONTAINER=$(docker ps --filter "ancestor=mongodb/mongodb-atlas-local:8.2.0" --format "{{.Names}}" | head -1)
 until [ "$(docker inspect --format='{{.State.Health.Status}}' "$MONGODB_CONTAINER")" = "healthy" ]; do
   sleep 3
 done
