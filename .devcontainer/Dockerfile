@@ -5,7 +5,9 @@ FROM jupyter/base-notebook:latest
 USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends docker.io docker-compose \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan \
+    && chmod 0440 /etc/sudoers.d/jovyan
 USER jovyan
 
 # Install Node.js 20 via conda-forge
