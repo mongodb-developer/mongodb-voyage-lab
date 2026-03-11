@@ -9,10 +9,9 @@ services:
       mongodb:
         condition: service_healthy
     command: sleep infinity
-    networks:
-      - lab
+    network_mode: service:mongodb
     environment:
-      - MONGODB_URI=mongodb://admin:mongodb@mongodb:27017/?directConnection=true
+      - MONGODB_URI=mongodb://admin:mongodb@localhost:27017/?directConnection=true
       - NODE_PATH=/workspaces/mongodb-voyage-lab/node_modules
 
   mongodb:
@@ -33,12 +32,5 @@ services:
       timeout: 5s
       retries: 10
       start_period: 20s
-    networks:
-      - lab
-
-networks:
-  lab:
-    driver: bridge
-
 volumes:
   mongodb_data:

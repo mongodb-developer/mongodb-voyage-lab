@@ -8,7 +8,7 @@
         "cpus": 4
     },
     "containerEnv": {
-        "MONGODB_URI": "mongodb://admin:mongodb@mongodb:27017/?directConnection=true",
+        "MONGODB_URI": "mongodb://admin:mongodb@localhost:27017/?directConnection=true",
         "NODE_PATH": "/workspaces/${localWorkspaceFolderBasename}/node_modules",
         "VOYAGE_API_KEY": "${localEnv:VOYAGE_API_KEY}"
     },
