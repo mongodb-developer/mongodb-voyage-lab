@@ -2,6 +2,7 @@
     "name": "MongoDB VoyageAI Lab",
     "dockerComposeFile": "docker-compose.yml",
     "service": "lab-runner",
+    "initializeCommand": "echo \"VOYAGE_API_KEY=${VOYAGE_API_KEY:-}\" > .devcontainer/.env",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [8888, 27017],
     "hostRequirements": {
