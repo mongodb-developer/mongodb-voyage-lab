@@ -10,7 +10,11 @@ if [ -z "$VOYAGE_API_KEY" ]; then
   exit 0
 fi
 
-# Write the key where docker-compose can read it for variable substitution.
+# Fix docker socket permissions for this session (group membership from
+# docker-outside-of-docker feature only applies to new login shells).
+sudo chmod 666 /var/run/docker.sock
+
+# Write the key where docker-compose reads it for variable substitution.
 printf 'VOYAGE_API_KEY=%s\n' "$VOYAGE_API_KEY" \
   > /workspaces/mongodb-voyage-lab/.devcontainer/.env
 
