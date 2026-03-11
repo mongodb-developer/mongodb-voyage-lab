@@ -1,16 +1,6 @@
 FROM jupyter/base-notebook:latest
 
-# Install docker CLI so postCreateCommand can restart the mongodb service
-# with VOYAGE_API_KEY injected into mongot (no docker-outside-of-docker feature needed)
-USER root
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends docker.io docker-compose \
-    && rm -rf /var/lib/apt/lists/* \
-    && echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan \
-    && chmod 0440 /etc/sudoers.d/jovyan
-USER jovyan
-
-# Install Node.js 20 via conda-forge
+# Install Node.js 20 via conda-forge (avoids requiring curl or external apt repos)
 RUN mamba install -y -c conda-forge nodejs=20 git \
     && mamba clean --all -y
 
