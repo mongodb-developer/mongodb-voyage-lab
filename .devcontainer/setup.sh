@@ -34,10 +34,7 @@ docker-compose \
   up -d --force-recreate --no-deps mongodb
 
 echo "Waiting for MongoDB to be ready..."
-until docker-compose \
-  --project-name "$PROJECT" \
-  -f /workspaces/mongodb-voyage-lab/.devcontainer/docker-compose.yml \
-  exec -T mongodb mongosh --quiet --eval "db.adminCommand('ping').ok" 2>/dev/null | grep -q 1; do
+until [ "$(docker inspect --format='{{.State.Health.Status}}' "$MONGODB_CONTAINER")" = "healthy" ]; do
   sleep 3
 done
 echo "MongoDB ready with VOYAGE_API_KEY configured."
