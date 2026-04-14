@@ -1,6 +1,6 @@
 # MongoDB × VoyageAI Lab
 
-Hands-on TypeScript notebooks exploring VoyageAI's embedding and reranking capabilities with MongoDB Atlas Vector Search.
+Hands-on TypeScript notebooks exploring VoyageAI's embedding and reranking capabilities with MongoDB Vector Search.
 
 ## Labs
 
@@ -45,7 +45,7 @@ code mongodb-voyage-lab
 
 | Component | Details |
 |-----------|---------|
-| MongoDB | `mongodb/mongodb-atlas-local:8.2.0` — includes Atlas Vector Search and `mongot` |
+| MongoDB | `mongodb/mongodb-atlas-local:8.2.0` — includes MongoDB Vector Search and `mongot` |
 | Jupyter | TypeScript kernel via [tslab](https://github.com/yunabe/tslab) |
 | Seed data | 100 Airbnb-style listings seeded automatically on first start |
 
@@ -78,5 +78,5 @@ data/
 ## Resources
 
 - [VoyageAI documentation](https://docs.voyageai.com)
-- [MongoDB Atlas Vector Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/)
+- [MongoDB Vector Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/)
 - [Auto-embedding with MongoDB](https://www.mongodb.com/docs/atlas/atlas-vector-search/crud-embeddings/create-embeddings-automatic/)
